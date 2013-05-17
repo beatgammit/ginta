@@ -21,7 +21,8 @@ const (
 	errors2_txt_contents   = "err_file_not_found=Its gone!\nerr_no_space_left=No space left on device\n"
 	content_txt_contents   = "greeting=Hello World\n"
 	bootstrap_txt_contents = "internal:DisplayName=English\n"
-	defaultPermissions     = os.FileMode(0600)
+	filePermissions        = os.FileMode(0600)
+	dirPermissions         = os.FileMode(0700)
 )
 
 /*	creates the following layout:
@@ -39,7 +40,7 @@ const (
 func dumpFile(path, contents string) error {
 	var ptr *os.File
 	var err error
-	if ptr, err = os.OpenFile(path, os.O_CREATE|os.O_WRONLY, defaultPermissions); err == nil {
+	if ptr, err = os.OpenFile(path, os.O_CREATE|os.O_WRONLY, filePermissions); err == nil {
 		defer ptr.Close()
 
 		_, err = io.Copy(ptr, bytes.NewBuffer([]byte(contents)))
@@ -57,12 +58,12 @@ func prepare(prefix string, t *testing.T) string {
 		t.FailNow()
 	}
 
-	if err = os.MkdirAll(root+path1, defaultPermissions); err != nil {
+	if err = os.MkdirAll(root+path1, dirPermissions); err != nil {
 		t.Error(err)
 		t.FailNow()
 	}
 
-	if err = os.MkdirAll(root+path2, defaultPermissions); err != nil {
+	if err = os.MkdirAll(root+path2, dirPermissions); err != nil {
 		t.Error(err)
 		t.FailNow()
 	}
