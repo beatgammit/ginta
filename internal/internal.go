@@ -1,3 +1,12 @@
+/*
+Internal workhorse of ginta. This package contains
+few functions of interest to the user, but isolates the
+core from the rest of the system to avoid accidental
+misuse. 
+
+It implements an actor that moderates all access to 
+language resources. 
+*/
 package internal
 
 import (
@@ -67,6 +76,7 @@ func init() {
 	go work()
 }
 
+// Request a resource for a country code, either plain or recursively
 func Request(code, key string, recurse bool) (string, error) {
 	reply := make(chan reply)
 	defer close(reply)
@@ -77,6 +87,7 @@ func Request(code, key string, recurse bool) (string, error) {
 	return replyVal.tr, replyVal.err
 }
 
+// Requests a bundle for a prefix, either plain or recursively
 func RequestBundle(code, base string, recursive bool) map[string]string {
 	reply := make(chan map[string]string)
 	defer close(reply)
@@ -91,6 +102,7 @@ func RequestBundle(code, base string, recursive bool) map[string]string {
 	return <-reply
 }
 
+// Registers a new language provider, using both a language and a resource enumerator function 
 func Register(lang <-chan types.Language, fetch func(string) <-chan types.Resource) {
 	for l := range lang {
 		register := languageRegister{l.Code, l.DisplayName, fetchFunc(fetch), make(chan bool)}
@@ -101,10 +113,12 @@ func Register(lang <-chan types.Language, fetch func(string) <-chan types.Resour
 	}
 }
 
+// Changes a mapped resource value
 func Update(code, key, val string) {
 	resourceEntry <- targetResource{code, types.Resource{key, val}}
 }
 
+// Lists all available languages
 func List() []*types.Language {
 	result := make(chan []*types.Language)
 	defer close(result)
@@ -114,6 +128,7 @@ func List() []*types.Language {
 	return <-result
 }
 
+// makes a language ready for use by loading all associated resources
 func Activate(code string) bool {
 	c := make(chan bool)
 	defer close(c)

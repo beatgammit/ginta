@@ -1,3 +1,27 @@
+/*
+A simple, file system based provider that uses multisrc 
+conventions to load its resources. It assumes the following
+file system layout past its root directory
+
+	+ <root>
+	+- code (e.g. en, es, de, ...)
+	 +- root resource files...
+	 +- path1
+	  +- resource files prefixed by path1...
+	  +- path2
+	   +- resource files prefixed by path1:path2...
+	   +- path3
+	   +- ...
+	+- ...
+
+This allows very easy grouping of resource bundles with common 
+prefixes, but still allows the developers maximal freedom (since
+they still can put hierarchical keys into a file)
+
+Its bootstrap mechanism is achieved by a file named "bootstrap.txt", 
+which is loaded when the language is first discovered, and must contain
+the 
+*/
 package fs
 
 import (
@@ -11,6 +35,7 @@ import (
 
 type provider string
 
+// Constructs a new provider, with the root directory pointing to the specified path
 func New(path string) ginta.LanguageProvider {
 	return &multi.Provider{provider(path), provider(path)}
 }

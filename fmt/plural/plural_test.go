@@ -15,9 +15,9 @@ func TestOneTwoThree(t *testing.T) {
 	}
 
 	ginta.Register(simple.New().AddLanguage("l1", "Language 1", map[string]string{
-		"plurals:t0:==1": "one",
-		"plurals:t0:==2": "two",
-		"plurals:t0:==3": "three",
+		"plurals:t0:eq1": "one",
+		"plurals:t0:eq2": "two",
+		"plurals:t0:eq3": "three",
 	}))
 
 	if p, err := parse([]string{"t0"}); err == nil {
@@ -54,8 +54,8 @@ func TestOneTwoMany(t *testing.T) {
 	}
 
 	contents := map[string]string{
-		"plurals:t0:==1":     "one",
-		"plurals:t0:==2":     "two",
+		"plurals:t0:eq1":     "one",
+		"plurals:t0:eq2":     "two",
 		"plurals:t0:default": "many",
 	}
 
@@ -70,8 +70,8 @@ func TestLessEqualGreaterThan(t *testing.T) {
 	}
 
 	contents := map[string]string{
-		"plurals:t0:<=1": "lessEqual",
-		"plurals:t0:>1":  "greater",
+		"plurals:t0:le1": "lessEqual",
+		"plurals:t0:gt1": "greater",
 	}
 
 	doTest(t, expect, contents, "l3")
@@ -85,8 +85,8 @@ func TestLessThanGreaterEqual(t *testing.T) {
 	}
 
 	contents := map[string]string{
-		"plurals:t0:<1":  "less",
-		"plurals:t0:>=1": "greaterEqual",
+		"plurals:t0:lt1": "less",
+		"plurals:t0:ge1": "greaterEqual",
 	}
 
 	doTest(t, expect, contents, "l4")
@@ -126,13 +126,13 @@ func TestModule(t *testing.T) {
 	}
 
 	contents := map[string]string{
-		"plurals:t0:%10==1":  "st",
-		"plurals:t0:%10==2":  "nd",
-		"plurals:t0:%10==3":  "rd",
-		"plurals:t0:==11":    "th",
-		"plurals:t0:==12":    "th",
-		"plurals:t0:==13":    "th",
-		"plurals:t0:default": "th",
+		"plurals:t0:modEq(10,1)": "st",
+		"plurals:t0:modEq(10,2)": "nd",
+		"plurals:t0:modEq(10,3)": "rd",
+		"plurals:t0:eq11":        "th",
+		"plurals:t0:eq12":        "th",
+		"plurals:t0:eq13":        "th",
+		"plurals:t0:default":     "th",
 	}
 
 	doTest(t, expect, contents, "l5")
@@ -148,8 +148,8 @@ func TestInterval(t *testing.T) {
 	}
 
 	contents := map[string]string{
-		"plurals:t0:[0,1[":   "inside",
-		"plurals:t0:default": "outside",
+		"plurals:t0:range(0,1)": "inside",
+		"plurals:t0:default":    "outside",
 	}
 
 	code := "l6"
@@ -191,19 +191,19 @@ func TestInputTypes(t *testing.T) {
 	}
 
 	ginta.Register(simple.New().AddLanguage("lx", "Language 3", map[string]string{
-		"plurals:t0:==1":  "1",
-		"plurals:t0:==2":  "2",
-		"plurals:t0:==3":  "3",
-		"plurals:t0:==4":  "4",
-		"plurals:t0:==5":  "5",
-		"plurals:t0:==6":  "6",
-		"plurals:t0:==7":  "7",
-		"plurals:t0:==8":  "8",
-		"plurals:t0:==9":  "9",
-		"plurals:t0:==10": "10",
-		"plurals:t0:==11": "11",
-		"plurals:t0:==12": "12",
-		"plurals:t0:==0":  "0",
+		"plurals:t0:eq1":  "1",
+		"plurals:t0:eq2":  "2",
+		"plurals:t0:eq3":  "3",
+		"plurals:t0:eq4":  "4",
+		"plurals:t0:eq5":  "5",
+		"plurals:t0:eq6":  "6",
+		"plurals:t0:eq7":  "7",
+		"plurals:t0:eq8":  "8",
+		"plurals:t0:eq9":  "9",
+		"plurals:t0:eq10": "10",
+		"plurals:t0:eq11": "11",
+		"plurals:t0:eq12": "12",
+		"plurals:t0:eq0":  "0",
 	}))
 
 	if p, err := parse([]string{"t0"}); err == nil {

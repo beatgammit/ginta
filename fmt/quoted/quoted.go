@@ -1,9 +1,11 @@
+// allows output of quoted-literal (%#v) values. Mainly useful for logging...
 package quoted
 
 import (
 	"code.google.com/p/ginta/fmt"
 )
 
+// Format ID
 const FormatName = "quoted"
 
 func init() {

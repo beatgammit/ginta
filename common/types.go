@@ -3,7 +3,6 @@ Defines the basic types of ginta, with their methods. These types are placed in
 a separate package to allow access to them from any package, without introducing
 unneccessary dependencies. 
 */
-
 package common
 
 import "strings"
@@ -23,7 +22,6 @@ type Language struct {
 A single resource entry. The (possibly) hierarchical key is mapped
 to a simple string value
 */
-
 type Resource struct {
 	Key   string
 	Value string
@@ -69,7 +67,6 @@ key=Schlüßel
 keyboard.key=Taste
 music.key=Tonart
 */
-
 type HierarchicalKey string
 
 /*
@@ -89,7 +86,6 @@ func (k HierarchicalKey) Key() string {
 Returns the prefix of a hierarchical resource key. The prefix is any leading sequence
 of :-separated path elements
 */
-
 func (k HierarchicalKey) Prefix() string {
 	str := string(k)
 	if idx := strings.LastIndex(str, ResourceKeySegmentSeparator); idx > -1 {
@@ -102,7 +98,6 @@ func (k HierarchicalKey) Prefix() string {
 /* Returns the hierarchical key, converted back to its string
 format
 */
-
 func (k HierarchicalKey) String() string {
 	return string(k)
 }
@@ -112,7 +107,6 @@ Splits the hierarchical key into a prefix and the local key. This method
 is equivalent to calling Prefix() and Key() individually, but may have better
 performance. 
 */
-
 func (k HierarchicalKey) Split() (string, string) {
 	str := string(k)
 	if idx := strings.LastIndex(str, ResourceKeySegmentSeparator); idx > -1 {

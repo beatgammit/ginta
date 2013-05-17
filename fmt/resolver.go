@@ -10,7 +10,6 @@ Resolvers intended for advanced message operations. They provide a simplified ac
 defining a base hierarchical path relative to which all resources will be located. Additionally, they
 automatically perform formatting operations on invocation. 
 */
-
 type Resolver struct {
 	// The base path relative to which all resources will be located. 
 	Base string

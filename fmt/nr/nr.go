@@ -1,10 +1,10 @@
 /*
 	Detailed formatter for integers. This formatter allows output of signed or padded integers. Inputs must be valid for
 	the fmt.Print... family of functions.
-	
+
 	The format has several flags that control layout. In addition to these flags (defined as constants here), a single numeric argument
 	may be provided in an arbitrary position. The presence of a numeric arguments indicates to pad the output to the specified length. 
-	
+
 	Example:
 		Format				Input		Output
 		{0,nr}					4			4

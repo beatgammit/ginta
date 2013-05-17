@@ -1,21 +1,27 @@
+// Simple static resource provider. Only really suitable for
+// very small applications or testing scenarios
 package simple
 
 import (
 	types "code.google.com/p/ginta/common"
 )
 
-type Provider map[string]*Language
-type Language struct {
+// Language provider type 
+type Provider map[string]*language
+type language struct {
 	DisplayName string
 	Entries     map[string]string
 }
 
+// Allocates a new language provider
 func New() Provider {
-	return make(map[string]*Language)
+	return make(map[string]*language)
 }
 
+// Adds a language (by means of a key->value map) to the provider, and returns
+// itself for call chaining
 func (p Provider) AddLanguage(code, name string, entries map[string]string) Provider {
-	p[code] = &Language{
+	p[code] = &language{
 		DisplayName: name,
 		Entries:     entries,
 	}
