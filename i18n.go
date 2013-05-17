@@ -1,8 +1,8 @@
 package ginta
 
 import (
-	types "code.google.com/p/ginta/trunk/ginta/common"
-	"code.google.com/p/ginta/trunk/ginta/internal"
+	types "code.google.com/p/ginta/common"
+	"code.google.com/p/ginta/internal"
 )
 
 type Enumerator interface {

@@ -2,7 +2,7 @@ package multisrc
 
 import (
 	"bytes"
-	"code.google.com/p/ginta/trunk/ginta/common"
+	"code.google.com/p/ginta/common"
 	"io"
 	"io/ioutil"
 	"testing"

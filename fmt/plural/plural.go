@@ -1,8 +1,8 @@
 package plural
 
 import (
-	"code.google.com/p/ginta/trunk/ginta"
-	"code.google.com/p/ginta/trunk/ginta/fmt"
+	"code.google.com/p/ginta"
+	"code.google.com/p/ginta/fmt"
 	sysfmt "fmt"
 	"math"
 	"strconv"

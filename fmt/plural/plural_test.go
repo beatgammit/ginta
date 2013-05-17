@@ -2,8 +2,8 @@ package plural
 
 import (
 	"bytes"
-	"code.google.com/p/ginta/trunk/ginta"
-	"code.google.com/p/ginta/trunk/ginta/providers/simple"
+	"code.google.com/p/ginta"
+	"code.google.com/p/ginta/providers/simple"
 	"testing"
 )
 

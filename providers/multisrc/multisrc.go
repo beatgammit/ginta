@@ -3,8 +3,8 @@ package multisrc
 import (
 	"bufio"
 	"bytes"
-	"code.google.com/p/ginta/trunk/ginta"
-	"code.google.com/p/ginta/trunk/ginta/common"
+	"code.google.com/p/ginta"
+	"code.google.com/p/ginta/common"
 	"io"
 	"strings"
 )

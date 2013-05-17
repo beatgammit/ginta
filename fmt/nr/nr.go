@@ -22,7 +22,7 @@ package nr
 
 import (
 	"bytes"
-	"code.google.com/p/ginta/trunk/ginta/fmt"
+	"code.google.com/p/ginta/fmt"
 	"strconv"
 )
 

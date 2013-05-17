@@ -1,7 +1,7 @@
 package internal
 
 import (
-	types "code.google.com/p/ginta/trunk/ginta/common"
+	types "code.google.com/p/ginta/common"
 )
 
 type fetchFunc func(string) <-chan types.Resource

@@ -1,7 +1,7 @@
 package internal
 
 import (
-	"code.google.com/p/ginta/trunk/ginta/common"
+	"code.google.com/p/ginta/common"
 	"testing"
 	"time"
 )

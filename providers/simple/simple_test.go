@@ -1,7 +1,7 @@
 package simple
 
 import (
-	"code.google.com/p/ginta/trunk/ginta"
+	"code.google.com/p/ginta"
 	"testing"
 )
 

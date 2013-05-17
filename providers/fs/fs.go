@@ -1,9 +1,9 @@
 package fs
 
 import (
-	"code.google.com/p/ginta/trunk/ginta"
-	types "code.google.com/p/ginta/trunk/ginta/common"
-	multi "code.google.com/p/ginta/trunk/ginta/providers/multisrc"
+	"code.google.com/p/ginta"
+	types "code.google.com/p/ginta/common"
+	multi "code.google.com/p/ginta/providers/multisrc"
 	"io/ioutil"
 	"os"
 	"path/filepath"

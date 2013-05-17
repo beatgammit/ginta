@@ -1,8 +1,8 @@
 package fmt
 
 import (
-	i18n "code.google.com/p/ginta/trunk/ginta"
-	"code.google.com/p/ginta/trunk/ginta/common"
+	i18n "code.google.com/p/ginta"
+	"code.google.com/p/ginta/common"
 )
 
 /*

@@ -1,7 +1,7 @@
 package quoted
 
 import (
-	"code.google.com/p/ginta/trunk/ginta/fmt"
+	"code.google.com/p/ginta/fmt"
 )
 
 const FormatName = "quoted"
