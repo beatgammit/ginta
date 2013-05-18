@@ -6,22 +6,42 @@ import (
 	"time"
 )
 
-func init() {
-	fmt.RegisterFormat("date", fmt.FormatDefinitionFunc(nil))
+const (
+	DateFormat = "date"
+	TimeFormat = "time"
+	DateTimeFormat = "dateTime"
+)
+
+type dateFormatType string
+
+func (typ dateFormatType) Compile(args []string) (fmt.MessageInput, error) {
+	return nil, fmt.NewError(fmt.MalformedFormatSpecificationErrorResourceKey, args)
 }
 
-type dateFormat func (ginta.Locale, time.Time) string
+func init() {
+	fmt.RegisterFormat(DateFormat, dateFormatType(DateFormat))
+	fmt.RegisterFormat(TimeFormat, dateFormatType(TimeFormat))
+	fmt.RegisterFormat(DateTimeFormat, dateFormatType(DateTimeFormat))
+}
+
+type dateFormat string
 
 func (d dateFormat) FormatString() string {
 	return "%v"
 }
 
 func (d dateFormat) Converter() fmt.Converter {
-	return fmt.ConverterFunc(func (locale ginta.Locale, arg interface{}) interface{} {
-		if time, ok := arg.(time.Time); ok {
-			return d(locale, time)
-		} 
-		
-		return arg
-	})
+	return d
+}
+
+func (d dateFormat) Convert(locale ginta.Locale, arg interface{}) interface{} {
+	if time, ok := arg.(time.Time); ok {
+		return EvaluateFormat(string(d), locale, time)
+	}
+	
+	return arg
+}
+
+func EvaluateFormat(format string, locale ginta.Locale, instant time.Time) string {
+	return ""
 }
