@@ -180,7 +180,7 @@ func _true(float64) bool {
 func moduleVal(input string) func(float64) bool {
 	var module, expect float64
 
-	if got, err := sysfmt.Sscanf(input, "%f==%f", &module, &expect); got == 2 && err == nil {
+	if got, err := sysfmt.Sscanf(input, "(%f,%f)", &module, &expect); got == 2 && err == nil {
 		return func(x float64) bool {
 			result := math.Mod(x, module)
 			return result == expect
@@ -195,7 +195,7 @@ func moduleVal(input string) func(float64) bool {
 func inRange(input string) func(float64) bool {
 	var start, end float64
 
-	if got, err := sysfmt.Sscanf(input, "%f,%f", &start, &end); got == 2 && err == nil {
+	if got, err := sysfmt.Sscanf(input, "(%f,%f)", &start, &end); got == 2 && err == nil {
 		return func(x float64) bool {
 			return x >= start && x < end
 		}
