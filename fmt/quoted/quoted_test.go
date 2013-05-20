@@ -12,6 +12,7 @@ const (
 )
 
 func TestQuoteParseOk(t *testing.T) {
+	Install()
 	in, err := parse([]string{})
 	if in.FormatString() != "%#v" || err != nil {
 		t.Error(in, err)
@@ -19,6 +20,7 @@ func TestQuoteParseOk(t *testing.T) {
 }
 
 func TestQuoteParseFail(t *testing.T) {
+	Install()
 	in, err := parse([]string{"1"})
 	if in != nil || err == nil {
 		t.Error(in, err)
@@ -26,6 +28,7 @@ func TestQuoteParseFail(t *testing.T) {
 }
 
 func TestQuotedSimple(t *testing.T) {
+	Install()
 	format, err := fmt.Compile("{0,quoted}")
 
 	if err != nil {
