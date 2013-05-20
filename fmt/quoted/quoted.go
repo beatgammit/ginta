@@ -8,7 +8,9 @@ import (
 // Format ID
 const FormatName = "quoted"
 
-func init() {
+// installs this format - should be called at the very start of the program, prior to registring
+// the first provider.
+func Install() {
 	fmt.RegisterFormat(FormatName, fmt.FormatDefinitionFunc(parse))
 }
 
