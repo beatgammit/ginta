@@ -1,3 +1,21 @@
+/*
+Allows formatted output of time values. 
+
+The input to this format needs to be of type time.Time, but its formatting
+is performed in a locale-sensitive manner. This package registers three formats: date, time
+and dateTime, exported as the ...Format constants. Each format provides three different
+manners of formatting for each locale: A short form, a normal (default) form, and
+a verbose form. The forms are selected with the Option... constants exported
+by this package. 
+
+The package expects, for each combination of format and length, a resource entry 
+(named TimeFormatRoot : <type> : <length>). This entry must have a form that is valid
+to feed into Time.Format(). 
+
+Also, the SubstitutionsResourceBundle may define a number of fixed strings that are
+replaced in the formatted output. Its chief use is to translate the names of months,
+and days of week.
+*/
 package time
 
 import (
@@ -9,15 +27,23 @@ import (
 )
 
 const (
-	DateFormat     = "date"
-	TimeFormat     = "time"
+	// Format ID: date format
+	DateFormat = "date"
+	// Format ID: time format
+	TimeFormat = "time"
+	// Format ID: date-Time format
 	DateTimeFormat = "dateTime"
 
-	OptionShort   = "short"
-	OptionLong    = "long"
+	// Format should select the short form
+	OptionShort = "short"
+	// Format should select a verbose form
+	OptionLong = "long"
+	// Format should select the "default" form. Optional
 	OptionDefault = "default"
 
-	TimeFormatRoot              = "time_format"
+	// Root resource bundle for all formatting resources
+	TimeFormatRoot = "time_format"
+	// Resource bundle for string replacements
 	SubstitutionsResourceBundle = TimeFormatRoot + ":substitutions"
 )
 
@@ -40,6 +66,7 @@ func (typ dateFormatType) Compile(args []string) (fmt.MessageInput, error) {
 	return nil, fmt.NewError(fmt.MalformedFormatSpecificationErrorResourceKey, args)
 }
 
+// Registers the date formats with the format package
 func Install() {
 	fmt.RegisterFormat(DateFormat, dateFormatType(DateFormat))
 	fmt.RegisterFormat(TimeFormat, dateFormatType(TimeFormat))
@@ -64,6 +91,8 @@ func (d dateFormat) Convert(locale ginta.Locale, arg interface{}) interface{} {
 	return arg
 }
 
+// Evaluates the format stored under the provided hierarchical key, performing formatting and substitutions
+// as defined in the current locale
 func EvaluateFormat(format common.HierarchicalKey, locale ginta.Locale, instant time.Time) string {
 	fmtString, err := locale.ResolveResource(format)
 	if err == nil {
