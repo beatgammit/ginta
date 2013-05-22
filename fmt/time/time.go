@@ -4,8 +4,8 @@ import (
 	"code.google.com/p/ginta"
 	"code.google.com/p/ginta/common"
 	"code.google.com/p/ginta/fmt"
-	"time"
 	"strings"
+	"time"
 )
 
 const (
@@ -13,11 +13,12 @@ const (
 	TimeFormat     = "time"
 	DateTimeFormat = "dateTime"
 
-	OptionShort = "short"
-	OptionLong  = "long"
-	
-	TimeFormatRoot = "time_format"
-	SubstitutionsResourceBundle =  TimeFormatRoot + ":substitutions"
+	OptionShort   = "short"
+	OptionLong    = "long"
+	OptionDefault = "default"
+
+	TimeFormatRoot              = "time_format"
+	SubstitutionsResourceBundle = TimeFormatRoot + ":substitutions"
 )
 
 type dateFormatType string
@@ -26,8 +27,8 @@ func (typ dateFormatType) Compile(args []string) (fmt.MessageInput, error) {
 	l := len(args)
 	var res string
 
-	if l == 0 {
-		res = TimeFormatRoot + ":" + string(typ) + ":default"
+	if l == 0 || (l == 1 && args[0] == OptionDefault) {
+		res = TimeFormatRoot + ":" + string(typ) + ":" + OptionDefault
 	} else if l == 1 && (args[0] == OptionShort || args[0] == OptionLong) {
 		res = TimeFormatRoot + ":" + string(typ) + ":" + args[0]
 	}
@@ -64,16 +65,17 @@ func (d dateFormat) Convert(locale ginta.Locale, arg interface{}) interface{} {
 }
 
 func EvaluateFormat(format common.HierarchicalKey, locale ginta.Locale, instant time.Time) string {
-	if fmtString, err := locale.ResolveResource(format); err == nil {
+	fmtString, err := locale.ResolveResource(format)
+	if err == nil {
 		result := instant.Format(fmtString)
-		
+
 		bundle := locale.ResolveResourceBundle(SubstitutionsResourceBundle)
-	
+
 		// now perform substitutions for strings (wednesday -> miércoles)
 		for from, to := range bundle {
 			result = strings.Replace(result, from, to, 1)
 		}
-		
+
 		return result
 	}
 
