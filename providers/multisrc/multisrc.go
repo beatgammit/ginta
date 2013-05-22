@@ -84,7 +84,7 @@ is interpreted the following way:
 	\  join lines if trailing
 	\\ literal backslash
 	#  treat the rest of the line as a comment
-	
+
 Lines are terminated by newlines (0x0a). Resource key names are separated from their values
 by = characters. Keys may not contain additional equals characters, but values may.
 */
