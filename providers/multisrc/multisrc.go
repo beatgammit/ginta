@@ -31,13 +31,13 @@ A walker can enumerate resource sources for a given language code
 type Walker interface {
 	// List all resource sources for a language. Once the last resource
 	// has been transferred, the channel must be closed 
-	Walk(code string) <-chan ResourceSource
+	Walk(code string) <-chan *ResourceSource
 }
 
 // Convenience walker for simple functions
-type WalkerFunc func(string) <-chan ResourceSource
+type WalkerFunc func(string) <-chan *ResourceSource
 
-func (f WalkerFunc) Walk(code string) <-chan ResourceSource {
+func (f WalkerFunc) Walk(code string) <-chan *ResourceSource {
 	return f(code)
 }
 
@@ -60,10 +60,27 @@ func (p *Provider) List(code string) <-chan common.Resource {
 	return c
 }
 
-func list(in <-chan ResourceSource, target chan<- common.Resource) {
+func list(in <-chan *ResourceSource, target chan<- common.Resource) {
 	defer close(target)
+	
+	i := 0
+	done := make(chan int)
+	defer close(done)
+	
 	for input := range in {
-		ParseTo(input.Reader, input.Prefix, target)
+		input := input
+		i++
+		
+		go func() {
+			defer input.Reader.Close()
+			ParseTo(input.Reader, input.Prefix, target)
+			done <- 0
+		}()
+	}
+	
+	for i > 0 {
+		<- done
+		i--
 	}
 }
 
@@ -89,7 +106,6 @@ Lines are terminated by newlines (0x0a). Resource key names are separated from t
 by = characters. Keys may not contain additional equals characters, but values may.
 */
 func ParseTo(inRaw io.ReadCloser, prefix string, target chan<- common.Resource) {
-	defer inRaw.Close()
 	in := bufio.NewReader(inRaw)
 
 	var key, val bytes.Buffer

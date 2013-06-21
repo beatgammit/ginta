@@ -143,7 +143,7 @@ func TestLineTermination(t *testing.T) {
 
 func TestScanPipeline(t *testing.T) {
 	out := make(chan common.Resource)
-	in := make(chan ResourceSource)
+	in := make(chan *ResourceSource)
 	buffers := []io.ReadCloser{
 		ioutil.NopCloser(bytes.NewBuffer([]byte(simpleContent))),
 		ioutil.NopCloser(bytes.NewBuffer([]byte(commentLines))),
@@ -153,7 +153,7 @@ func TestScanPipeline(t *testing.T) {
 
 	go func() {
 		for _, buffer := range buffers {
-			in <- ResourceSource{buffer, ""}
+			in <- &ResourceSource{buffer, ""}
 		}
 
 		close(in)
@@ -161,43 +161,31 @@ func TestScanPipeline(t *testing.T) {
 
 	go list(in, out)
 
-	res := <-out
+	m := map[string]string {}
+	
+	for res := range out {
+		m[res.Key] = res.Value
+	} 
 
-	if res.Key != "key1" || res.Value != "val1" {
-		t.Error(res)
+	if m["key1"]  != "val1" {
+		t.Error(m)
 	}
 
-	res = <-out
-	if res.Key != "key2" || res.Value != "val2" {
-		t.Error(res)
+	if m["key2"] != "val2" {
+		t.Error(m)
 	}
 
-	res = <-out
-	if res.Key != "key3" || res.Value != "val3" {
-		t.Error(res)
+	if m["key3"]  != "val3" {
+		t.Error(m)
+	}
+	
+	// sate of k1 undefined now
+
+	if m["k2"]  != "various" {
+		t.Error(m)
 	}
 
-	res = <-out
-	if res.Key != "k1" || res.Value != "nix" {
-		t.Error(res)
-	}
-
-	res = <-out
-	if res.Key != "k1" || res.Value != "v1" {
-		t.Error(res)
-	}
-
-	res = <-out
-	if res.Key != "k2" || res.Value != "various" {
-		t.Error(res)
-	}
-
-	res = <-out
-	if res.Key != "long" || res.Value != "This is a really long text\nwith an internal line break" {
-		t.Error(res)
-	}
-
-	if _, ok := <-out; ok {
-		t.Error("channel should be closed after last reader")
+	if m["long"] != "This is a really long text\nwith an internal line break" {
+		t.Error(m)
 	}
 }

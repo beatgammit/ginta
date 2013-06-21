@@ -76,6 +76,7 @@ func parseBootstrap(dir string) (string, error) {
 	c := make(chan types.Resource)
 	go func() {
 		if file, err := open(dir + bootstrapExtension); err == nil {
+			defer file.Close()
 			multi.ParseTo(file, "", c)
 		}
 
@@ -91,8 +92,8 @@ func parseBootstrap(dir string) (string, error) {
 	return "", types.ResourceNotFoundError(types.DisplayNameResourceKey)
 }
 
-func (f provider) Walk(code string) <-chan multi.ResourceSource {
-	c := make(chan multi.ResourceSource)
+func (f provider) Walk(code string) <-chan *multi.ResourceSource {
+	c := make(chan *multi.ResourceSource)
 	go func() {
 		defer close(c)
 		list(string(f)+"/"+code, "", c)
@@ -101,14 +102,14 @@ func (f provider) Walk(code string) <-chan multi.ResourceSource {
 	return c
 }
 
-func list(dirPath string, prefix string, target chan<- multi.ResourceSource) {
+func list(dirPath string, prefix string, target chan<- *multi.ResourceSource) {
 	if entries, err := ioutil.ReadDir(filepath.FromSlash(dirPath)); err == nil {
 		for _, file := range entries {
 			name := dirPath + "/" + file.Name()
 			if file.IsDir() {
 				list(name, prefix+file.Name()+types.ResourceKeySegmentSeparator, target)
 			} else if file, err := open(name); err == nil {
-				target <- multi.ResourceSource{file, prefix}
+				target <- &multi.ResourceSource{file, prefix}
 			}
 		}
 	}
