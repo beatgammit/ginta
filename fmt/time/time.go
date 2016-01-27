@@ -19,9 +19,9 @@ and days of week.
 package time
 
 import (
-	"code.google.com/p/ginta"
-	"code.google.com/p/ginta/common"
-	"code.google.com/p/ginta/fmt"
+	"github.com/beatgammit/ginta"
+	"github.com/beatgammit/ginta/common"
+	"github.com/beatgammit/ginta/fmt"
 	"strings"
 	"time"
 )

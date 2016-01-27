@@ -2,7 +2,7 @@ package multisrc
 
 import (
 	"bytes"
-	"code.google.com/p/ginta/common"
+	"github.com/beatgammit/ginta/common"
 	"io"
 	"io/ioutil"
 	"testing"

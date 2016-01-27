@@ -1,7 +1,7 @@
 package fmt
 
 import (
-	"code.google.com/p/ginta"
+	"github.com/beatgammit/ginta"
 	"testing"
 )
 

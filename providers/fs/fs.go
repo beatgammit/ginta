@@ -25,9 +25,9 @@ the
 package fs
 
 import (
-	"code.google.com/p/ginta"
-	types "code.google.com/p/ginta/common"
-	multi "code.google.com/p/ginta/providers/multisrc"
+	"github.com/beatgammit/ginta"
+	types "github.com/beatgammit/ginta/common"
+	multi "github.com/beatgammit/ginta/providers/multisrc"
 	"io/ioutil"
 	"os"
 	"path/filepath"

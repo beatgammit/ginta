@@ -10,7 +10,7 @@ language resources.
 package internal
 
 import (
-	types "code.google.com/p/ginta/common"
+	types "github.com/beatgammit/ginta/common"
 )
 
 type fetchFunc func(string) <-chan types.Resource

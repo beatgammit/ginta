@@ -3,7 +3,7 @@
 package simple
 
 import (
-	types "code.google.com/p/ginta/common"
+	types "github.com/beatgammit/ginta/common"
 )
 
 // Language provider type 

@@ -1,9 +1,9 @@
 package time
 
 import (
-	"code.google.com/p/ginta"
-	"code.google.com/p/ginta/internal"
-	"code.google.com/p/ginta/providers/simple"
+	"github.com/beatgammit/ginta"
+	"github.com/beatgammit/ginta/internal"
+	"github.com/beatgammit/ginta/providers/simple"
 	"testing"
 	"time"
 )

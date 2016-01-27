@@ -1,7 +1,7 @@
 package internal
 
 import (
-	"code.google.com/p/ginta/common"
+	"github.com/beatgammit/ginta/common"
 	"testing"
 	"time"
 )

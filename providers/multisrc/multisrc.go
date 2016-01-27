@@ -8,8 +8,8 @@ package multisrc
 import (
 	"bufio"
 	"bytes"
-	"code.google.com/p/ginta"
-	"code.google.com/p/ginta/common"
+	"github.com/beatgammit/ginta"
+	"github.com/beatgammit/ginta/common"
 	"io"
 	"strings"
 )

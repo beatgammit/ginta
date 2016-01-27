@@ -2,7 +2,7 @@
 package quoted
 
 import (
-	"code.google.com/p/ginta/fmt"
+	"github.com/beatgammit/ginta/fmt"
 )
 
 // Format ID

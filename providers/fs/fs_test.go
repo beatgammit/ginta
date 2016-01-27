@@ -2,7 +2,7 @@ package fs
 
 import (
 	"bytes"
-	"code.google.com/p/ginta"
+	"github.com/beatgammit/ginta"
 	"io"
 	"io/ioutil"
 	"os"

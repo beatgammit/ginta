@@ -19,8 +19,8 @@
 package ginta
 
 import (
-	types "code.google.com/p/ginta/common"
-	"code.google.com/p/ginta/internal"
+	types "github.com/beatgammit/ginta/common"
+	"github.com/beatgammit/ginta/internal"
 )
 
 /*

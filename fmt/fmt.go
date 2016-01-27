@@ -19,8 +19,8 @@ package fmt
 
 import (
 	"bytes"
-	i18n "code.google.com/p/ginta"
-	"code.google.com/p/ginta/common"
+	i18n "github.com/beatgammit/ginta"
+	"github.com/beatgammit/ginta/common"
 	sysfmt "fmt"
 	"strconv"
 	"strings"

@@ -22,7 +22,7 @@ package nr
 
 import (
 	"bytes"
-	"code.google.com/p/ginta/fmt"
+	"github.com/beatgammit/ginta/fmt"
 	"strconv"
 )
 

@@ -2,11 +2,11 @@
 package setup
 
 import (
-	"code.google.com/p/ginta"
-	"code.google.com/p/ginta/fmt/nr"
-	"code.google.com/p/ginta/fmt/plural"
-	"code.google.com/p/ginta/fmt/quoted"
-	"code.google.com/p/ginta/fmt/time"
+	"github.com/beatgammit/ginta"
+	"github.com/beatgammit/ginta/fmt/nr"
+	"github.com/beatgammit/ginta/fmt/plural"
+	"github.com/beatgammit/ginta/fmt/quoted"
+	"github.com/beatgammit/ginta/fmt/time"
 )
 
 func Setup(providers ...ginta.LanguageProvider) {
